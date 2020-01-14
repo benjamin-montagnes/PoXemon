@@ -13,15 +13,17 @@
 #include "interior.hpp"
 #include "center.hpp"
 #include "Backpack_map.hpp"
+#include "Backpack.h"
+#include "box.hpp"
 
 using namespace std;
 
 //This is our class for our map
 
-class Map 
+class Map
 {
     public:
-        Map(sf::RenderWindow &window);
+        Map(sf::RenderWindow &window, int poke_name);
         ~Map();
         void draw(sf::RenderWindow &window,sf::View &view, Trainer &trainer, sf::Clock& clock, sf::Event &event);
         void initialisation(sf::RenderWindow &window, Trainer &trainer, sf::View &view);
@@ -37,7 +39,19 @@ class Map
         bool obtained_light;
         bool mr_fountain;
         bool foot_players;
+        map<string, vector<Npc*> > npcs; //Map mapping each map_name to its associated vector of npcs
+
+         //Checking opponent trainers
+        void check_opponents(Backpack &bag);
+
+        //Backpack
+        BackpackMap backpack;
+        
+        //Box
+        Box box;
     
+        string map_name;
+
     private:
         TileMap background1_1;
         TileMap background1_2;
@@ -54,11 +68,9 @@ class Map
         Interior background10;
         TileMap background11;
         TileMap background11_2;
-    
-        map<string, vector<Npc*> > npcs; //Map mapping each map_name to its associated vector of npcs
-        
+        Interior background12;
+
         map<string, const int*> collision_;
-        string map_name;
         int alpha;
         string state;
         int animationCounter;
@@ -71,11 +83,11 @@ class Map
         sf::Sprite pokeBuilding;
         Shop shop;
         Center center;
-    
+
         //Places of Spawn of the Trainer
         int initialX;
         int initialY;
-    
+
         map<string,vector<vector<int>>> spawn_dict;
         int door;//which spwaning position
         vector<string> map_list;
@@ -83,7 +95,7 @@ class Map
         bool enter;
         bool fight;
         int nNpc;
-    
+
         //illusions
         void illuCenter(sf::RenderWindow &window);
         void illuShop(sf::RenderWindow &window);
@@ -91,14 +103,16 @@ class Map
         void illuTunnelL(sf::RenderWindow &window);
         void illuGrandhall(sf::RenderWindow &window);
         void illuBat80(sf::RenderWindow &window);
-    
+
         //Shader for the underground
         void light(sf::RenderWindow &window, sf::View &view);
-        
+
         //Flower animation
         void movingFlower(sf::RenderWindow &window, int x, int y);
         void flowerList(sf::RenderWindow &window);
-    
-        //Backpack
-        BackpackMap backpack;
-};  
+
+
+        //Fish
+        void fish(sf::RenderWindow &window, sf::View &view, Trainer &trainer);
+
+};

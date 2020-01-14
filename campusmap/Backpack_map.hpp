@@ -7,7 +7,7 @@
 #include <SFML/Audio.hpp>
 #include <sstream>
 #include "trainer.hpp"
-#include "fights/Backpack_Pokemon.cpp"
+#include "Pokemon_Button.h"
 
 using namespace std;
 
@@ -27,6 +27,9 @@ public:
     
     void Moveleft(sf::Event &event);
     void Moveright(sf::Event &event);
+    
+    void heal_small(sf::Event &event);
+    void heal_big(sf::Event &event);
     
     //Information for the Fights
     std::map<std::string, int> inventory;
@@ -80,6 +83,7 @@ private:
     void draw_menu(sf::RenderWindow &window, sf::View &view, sf::Event &event, Trainer &trainer);
     void draw_pokemon(sf::RenderWindow &window, sf::View &view, sf::Event &event, Trainer &trainer);
     
+    
     int capacity;
     
     
@@ -91,8 +95,8 @@ private:
     sf::Texture types;
     sf::Font font;
     sf::Font font_menu;
-    sf::Text menu[7];
-    sf::Text quantity[7];
+    sf::Text menu[6];
+    sf::Text quantity[6];
     sf::Text instruction;
     
     float width_backpack;
@@ -102,19 +106,31 @@ private:
     bool release;
     bool release_left;
     bool release_right;
+    bool release_small_health;
+    bool release_big_health;
+    
+    //booleans for potion
+    bool small_selected;
+    bool big_selected;
     
     sf::FloatRect getViewBounds(const sf::View &view);
+    
+    void switchPokemon(sf::RenderWindow &window, sf::Event &event, sf::View &view, Trainer &trainer);
+    bool sw;
+    int swi1;
+    int swi2;
 };
 
 //dictionnary giving the different possible existing items in the game
 const std::string item_type[] = {
-    "Normalball","Superball", "Masterball", "Incubator", "Starpowder", "SmallHealthPotion", "BigHealthPotion"
+    "Normalball","Superball", "Masterball", "SmallHealthPotion", "BigHealthPotion", "Torch"
 };
 
 //Function to create strings from values
 template <typename T>
 std::string toString(T arg){
-    std::stringstream ss;
+    std::stringstream ss; 
     ss << arg;
     return ss.str();
 }
+

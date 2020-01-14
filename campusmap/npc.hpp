@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 #include "trainer.hpp"
-#include "fights/Backpack.h"
+#include "Backpack.h"
 
 using namespace std;
 
@@ -25,6 +25,7 @@ class Npc {
         string name;
         vector<string> discussion;
         bool fixed;
+        bool beaten;
     
     protected:
         sf::Texture textureNpc;
@@ -38,6 +39,7 @@ class Npc {
         int sheetPosY;
         int sheetRectX;
         int sheetRectY;
+        
         
         
         

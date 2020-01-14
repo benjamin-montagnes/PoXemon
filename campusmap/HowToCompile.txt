@@ -1,9 +1,0 @@
-Using the makefile
-
-make game 
-
-export DISPLAY=:0.0
-
-./game
-
-make clean
