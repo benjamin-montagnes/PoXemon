@@ -221,6 +221,7 @@ void StateFunctions1::initialize_state1(char& game_mode, sf::Sprite& opp_sprite,
     if (!star_texture.loadFromFile("Images/12star.png")) { std::cout << "star could not load" << std::endl; }
     star_texture.loadFromFile("Images/12star.png");
     star.setTexture(star_texture);
+    star.setOrigin(0,0);
     star.setOrigin(star.getGlobalBounds().width / 2, star.getGlobalBounds().height / 2);
 //    star.setScale(sf::Vector2f(0.75, 0.75)); // How to make it relate to window size???
 //    opp.setScale(sf::Vector2f(1, 1));
@@ -229,7 +230,7 @@ void StateFunctions1::initialize_state1(char& game_mode, sf::Sprite& opp_sprite,
     opp.setOrigin(opp.getGlobalBounds().width / 2, opp.getGlobalBounds().height / 2);
     star.setPosition(0, 0);
     star.move(window.getSize().x / 2 + 3 * window.getSize().x / 25, window.getSize().y / 2 + window.getSize().y / 15);
-//    opp.setPosition(0, 0);
+    opp.setPosition(0, 0);
     opp.setPosition(250, 230);
     opp.move(window.getSize().x / 2 + 3 * window.getSize().x / 25, window.getSize().y / 2 + window.getSize().y / 15);
     //opponent name
@@ -269,6 +270,7 @@ void StateFunctions1::initialize_state1(char& game_mode, sf::Sprite& opp_sprite,
         run_text.setPosition(window.getSize().x * 8/9 , window.getSize().y *8/9);
         run_sprite.setPosition(run_text.getPosition().x, run_text.getPosition().y-run_sprite.getGlobalBounds().height/2); //bottom left corner
     }
+    
 
 }
     
@@ -283,12 +285,13 @@ void StateFunctions1::draw_state1(sf::RenderWindow& window, Pokemon_Button* butt
     window.draw(info_text);
 
     //star+opponent
-    window.draw(star);
+    // window.draw(star);
     window.draw(opp);
     window.draw(opp_name);
     window.draw(opp_lvl);
 
     //buttons
+    
     if (buttons[0])buttons[0]->draw(window);
     if (buttons[1])buttons[1]->draw(window);
     if (buttons[2])buttons[2]->draw(window);

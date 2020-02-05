@@ -8,7 +8,8 @@ Bullet::Bullet() {
     bullet.setTexture(bpic);
     //I find easier to set the origin at center
     bullet.setOrigin(sf::Vector2f(bullet.getLocalBounds().width / 2, bullet.getLocalBounds().height / 2));
-    bullet.setScale(sf::Vector2f(0.05f, 0.05f));
+//    bullet.setScale(sf::Vector2f(0.05f, 0.05f));
+    bullet.setScale(sf::Vector2f(0.1f, 0.1f));
 }
 
 void Bullet::deletion(){
@@ -94,7 +95,8 @@ void Bullet_Attack1::update_image(){
 
         bullet.setTexture(deleting_pic);
         bullet.setTextureRect(sf::IntRect(array[8]+posx*(array[10]),array[9]+posy*(array[11]),array[10],array[11]));
-        bullet.setScale(sf::Vector2f(array[15], array[15]));
+//        bullet.setScale(sf::Vector2f(array[15], array[15]));
+        bullet.setScale(sf::Vector2f(2*array[15], 2*array[15]));
     }
 }
 
@@ -116,7 +118,8 @@ void Bullet_Attack1::deletion(){
     deleting = true;
     bullet.setTexture(deleting_pic);
     bullet.setTextureRect(sf::IntRect(array[8]*array[10],array[9]*array[11],array[10],array[11]));
-    bullet.setScale(sf::Vector2f(array[15], array[15]));
+//    bullet.setScale(sf::Vector2f(array[15], array[15]));
+    bullet.setScale(sf::Vector2f(2*array[15], 2*array[15]));
     posx = array[8];
     posy = array[9];
 }

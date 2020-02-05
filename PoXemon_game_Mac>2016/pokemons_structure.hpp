@@ -100,6 +100,7 @@ const std::map<std::string, Pokemon_info> Pokemons = {
 	{"Golnite", { 200.f, 620.f, "golnite", 100, 1, 0, 20 }},
 	{"Warmau", { 200.f, 620.f, "warmau", 100, 1, 0, 20 }},
 	{"Mepowat", { 200.f, 620.f, "mepowat" ,100, 1, 0, 20 }},
+    {"Rabloni", { 200.f, 620.f, "rabloni" ,100, 1, 0, 20 }},
 
 	//Fire
 	{"Poras", { 270.f, 800.f, "poras",100, 1, 0, 40 }},

@@ -9,7 +9,7 @@ class Bullet
 public:
     float x = 0;
     float y = 0;
-    float max_speed = 850.0;
+    float max_speed = 2*850.0;
     bool deleted;
     bool deleting; // To know if is has hit the opponent - then we do the 'exploding' animation (used later)
 
@@ -94,7 +94,8 @@ public:
         bullet.setTexture(bpic);
         bullet.setTextureRect(sf::IntRect(array[0]*array[2],array[1]*array[3],array[2],array[3]));     // This chooses which part of the sprite we use - first two arguments are where you start
                                                                                     // second 2 args are the size
-        bullet.setScale(sf::Vector2f(array[7], array[7]));
+//        bullet.setScale(sf::Vector2f(array[7], array[7]));
+        bullet.setScale(sf::Vector2f(2*array[7], 2*array[7]));
         bullet.setOrigin(sf::Vector2f(bullet.getLocalBounds().width / 2, bullet.getLocalBounds().height / 2));
     };
 

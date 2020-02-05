@@ -15,7 +15,7 @@ Normally, the pokeball is not thrown by the pokemon but by the player
 class Pokeball {
 public:
     float velocityX ;  //Set the speed of each of the pokeballs
-    float ballHeight = 300;
+    float ballHeight = 500;
     float velocityY;
     float x;
     float y;
@@ -23,7 +23,7 @@ public:
     sf::Sprite ball;
     
     float gravity = 981.0f ;//This will make the parabolic trajectory
-    float airfriction = 0.4;
+    float airfriction = 0.5;
     float coefimpact = 0.2;
     bool in_air;
     int bounce;

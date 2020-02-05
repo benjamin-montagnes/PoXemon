@@ -19,7 +19,7 @@ void Opponent::update(float& deltaTime, sf::RenderWindow& window, sf::Clock& clo
                         sf::Clock& clock1, sf::Clock& clock2, sf::Clock& clock3, float& groundY){
     //Movement
     velocityX = 0.0f;
-    velocityX = direction * speed;
+    velocityX = 2*direction * speed;
 
     //random left-right movement
     //We choose a random amount of time (time_change_dir) throughout which we dont change direction.
@@ -39,7 +39,7 @@ void Opponent::update(float& deltaTime, sf::RenderWindow& window, sf::Clock& clo
         if (abs(x - bx) <= 200 && abs(y-by)<=30){//check if the bullet is close
             if (canJump) {
                 int i = rand()%100;
-                if (i<1+(level*2)){
+                if (i<20+(level*2)){
                     //to do: find a way not to make it always jump (otherwise its too hard to win)
                     canJump = false;
                     velocityY = -sqrt(2.0f * 981.0f * jumpHeight);//jump
@@ -49,7 +49,7 @@ void Opponent::update(float& deltaTime, sf::RenderWindow& window, sf::Clock& clo
     }
 
     //random jumps
-    if (rand() < 0.0005 * ((double)RAND_MAX + 1.0) && canJump) { // probability of jumping of 0.0005 at each update (if we are not already jumping)
+    if (rand() < 0.001 * ((double)RAND_MAX + 1.0) && canJump) { // probability of jumping of 0.0005 at each update (if we are not already jumping)
         canJump = false;
         velocityY = -sqrt(2.0f * 981.0f * jumpHeight);
     }

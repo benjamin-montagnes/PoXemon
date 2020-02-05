@@ -50,6 +50,7 @@ class Map
         //Box
         Box box;
     
+        //map names
         string map_name;
 
     private:

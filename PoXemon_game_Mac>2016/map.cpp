@@ -67,6 +67,7 @@ Map::Map(sf::RenderWindow &window, int poke_name)
     collision_.insert(pair<string, const int*>("room_clement", collision10));
     collision_.insert(pair<string, const int*>("bossfinal", collision11));
     collision_.insert(pair<string, const int*>("hall", collision12));
+    collision_.insert(pair<string, const int*>("pokeCenter2", pokeCenterC2));
 
     map_name= "first"; //Beggining of the game
 
@@ -150,7 +151,20 @@ Map::Map(sf::RenderWindow &window, int poke_name)
     Npc* healer = new Npc("healer","Sprites/NPC1.png",433,962,32,32,1.f,105,16,dialogueC, true);
     npcs_pokeCenter.push_back(healer) ;
     npcs.insert(pair< string, vector<Npc*> >("pokeCenter", npcs_pokeCenter));
+    npcs.insert(pair< string, vector<Npc*> >("pokeCenter2", npcs_pokeCenter));
 
+    
+    //For the finalboss
+    vector<Npc*> npcs_boss;
+    vector<string> dialogueboss;
+    dialogueboss.push_back("Hi I'm Julien");
+    dialogueboss.push_back("IM ITTTAAAAALLLLIIIAANNNN");
+    dialogueboss.push_back("Do you really think");
+    dialogueboss.push_back("you can beat me?");
+    dialogueboss.push_back("Fighting");
+    npcs_boss.push_back(new Trainer_opponent("julien","Sprites/NPC1.png",241,673,32,32,1.f,216,128,dialogueboss,false,5));
+    npcs.insert(pair< string, vector<Npc*> >("hall", npcs_boss));
+    
     //For Home
     vector<Npc*> npcs_home;
     vector<string> dialogueH;
@@ -332,7 +346,7 @@ Map::Map(sf::RenderWindow &window, int poke_name)
     //for y multiple of 16
 
     //Spawning position
-    map_list = {"first","second","third","fourth","pokeShop","pokeCenter","home","maze","interior_80","room_clement","bossfinal", "hall"};
+    map_list = {"first","second","third","fourth","pokeShop","pokeCenter","home","maze","interior_80","room_clement","bossfinal", "hall","pokeCenter2"};
     //first map
     spawn_dict.insert(pair< string, vector<vector<int> >>("first",{{264, 288},{8, 192},{184, 160},{248,464}}));
     //underground
@@ -354,9 +368,11 @@ Map::Map(sf::RenderWindow &window, int poke_name)
     //room_clement
     spawn_dict.insert(pair< string, vector<vector<int> >>("room_clement",{{184,336}}));
     //bossfinal
-    spawn_dict.insert(pair< string, vector<vector<int> >>("bossfinal",{{248,480}}));
+    spawn_dict.insert(pair< string, vector<vector<int> >>("bossfinal",{{248,480},{248,160}}));
     //bossfinal
     spawn_dict.insert(pair< string, vector<vector<int> >>("hall",{{264,352}}));
+    //pokeCenter2
+    spawn_dict.insert(pair< string, vector<vector<int> >>("pokeCenter2",{{104,112}}));
 
     fight = false;
     
@@ -466,8 +482,8 @@ void Map::trainerDisplacement(sf::RenderWindow &window, Trainer &trainer, sf::Ev
         else enter = false;
 
         //Exiting Shop and Center
-        if (event.type == sf::Event::KeyPressed&&event.key.code == sf::Keyboard::W&&((map_name == "pokeShop"&&trainer.state == "Shopping")||(trainer.state == "Healing"&&map_name == "pokeCenter"))){
-            if(trainer.state == "Healing"&&map_name == "pokeCenter"){
+        if (event.type == sf::Event::KeyPressed&&event.key.code == sf::Keyboard::W&&((map_name == "pokeShop"&&trainer.state == "Shopping")||(trainer.state == "Healing"&&(map_name == "pokeCenter" || map_name == "pokeCenter2")))){
+            if(trainer.state == "Healing"&&(map_name == "pokeCenter" || map_name == "pokeCenter2")){
                 trainer.state = "Stop";
             }
             else if(trainer.state == "Shopping"&&map_name == "pokeShop"){
@@ -621,7 +637,7 @@ void Map::trainerDisplacement(sf::RenderWindow &window, Trainer &trainer, sf::Ev
             mt19937 gen(rd());
             uniform_real_distribution<> dis(0.0, 1.0);
             float probagenerated = dis(gen);
-                if (probagenerated<0.01) {
+                if (probagenerated<0.0075) {
                     fight = true;
                     std::cout<<"POKEEEEMMMOONNN"<<std::endl;
                     trainer.fight_mode = 'w'; //Which means single pokemon in grass
@@ -768,6 +784,11 @@ void Map::draw(sf::RenderWindow &window,sf::View &view, Trainer &trainer, sf::Cl
     }
 
     else if (map_name == "pokeCenter"){
+        pokeBuilding.setTextureRect(sf::IntRect(42,49,224,144));
+        pokeBuilding.setPosition(0, 0);
+        window.draw(pokeBuilding);
+    }
+    else if (map_name == "pokeCenter2"){
         pokeBuilding.setTextureRect(sf::IntRect(42,49,224,144));
         pokeBuilding.setPosition(0, 0);
         window.draw(pokeBuilding);
@@ -964,7 +985,7 @@ void Map::draw(sf::RenderWindow &window,sf::View &view, Trainer &trainer, sf::Cl
 
 
 void Map::fillTree(sf::RenderWindow &window){
-    for(int i = 0; i < 26; i++){
+    for(int i = 0; i < 28; i++){
         for(int j = 0; j < 26; j++){
             for(int k = 0; k < 2; k++){
                 for(int l = 0; l < 2; l++){
@@ -979,7 +1000,7 @@ void Map::fillTree(sf::RenderWindow &window){
     }
 
     //Top
-    for(int i = 0; i < 17; i++){
+    for(int i = 0; i < 19; i++){
         for(int k = 0; k < 2; k++){
             sf::Sprite sprite;
             (sprite).setTexture(texture_1);
@@ -990,7 +1011,7 @@ void Map::fillTree(sf::RenderWindow &window){
     }
 
     //Bottom
-    for(int i = 0; i < 17; i++){
+    for(int i = 0; i < 19; i++){
         for(int k = 0; k < 2; k++){
             sf::Sprite sprite;
             (sprite).setTexture(texture_1);
@@ -1103,7 +1124,7 @@ void Map::illuShop(sf::RenderWindow &window){
 
 void Map::illuTunnelR(sf::RenderWindow &window){
     if (map_name == "fourth"){
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 6; i++){
             sf::Sprite sprite;
             (sprite).setTexture(texture_2);
             (sprite).setTextureRect(sf::IntRect(409, 18 + 17 * i, 16, 16));
@@ -1130,7 +1151,7 @@ void Map::illuTunnelR(sf::RenderWindow &window){
 
 void Map::illuTunnelL(sf::RenderWindow &window){
     if (map_name == "home"){
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 6; i++){
             sf::Sprite sprite;
             (sprite).setTexture(texture_2);
             (sprite).setTextureRect(sf::IntRect(494, 18 + 17 * i, 16, 16));
@@ -1294,10 +1315,11 @@ void Map::fish(sf::RenderWindow &window, sf::View &view, Trainer &trainer){
         mt19937 gen(rd());
         uniform_real_distribution<> dis(0.0, 1.0);
         float probagenerated = dis(gen);
-        if (probagenerated<0.02){
+        if (probagenerated<0.001){
             trainer.text.setString("A wild Pokemon was caught!");
             trainer.state = "Fighting";
             trainer.fight_mode = 'w';
+            catched = true;
         }
         else if (trainer.text.getString() != "A wild Pokemon was caught!")
             trainer.text.setString("Fishing...");

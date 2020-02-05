@@ -269,10 +269,10 @@ void Trainer::rock(sf::RenderWindow &window, sf::View &view){
 
         bubble.setPointCount(8);
         bubble.setPoint(0, sf::Vector2f(float(viewBounds.left + 30), float(viewBounds.top + viewBounds.height - 60)));
-        bubble.setPoint(1, sf::Vector2f(float(viewBounds.left + viewBounds.height - 30), float(viewBounds.top + viewBounds.height - 60)));
-        bubble.setPoint(2, sf::Vector2f(float(viewBounds.left + viewBounds.height - 10), float(viewBounds.top + viewBounds.height - 45)));
-        bubble.setPoint(3, sf::Vector2f(float(viewBounds.left + viewBounds.height - 10), float(viewBounds.top + viewBounds.height - 25)));
-        bubble.setPoint(4, sf::Vector2f(float(viewBounds.left + viewBounds.height - 30), float(viewBounds.top + viewBounds.height - 10)));
+        bubble.setPoint(1, sf::Vector2f(float(viewBounds.left + viewBounds.height + 130), float(viewBounds.top + viewBounds.height - 60)));
+        bubble.setPoint(2, sf::Vector2f(float(viewBounds.left + viewBounds.height + 150), float(viewBounds.top + viewBounds.height - 45)));
+        bubble.setPoint(3, sf::Vector2f(float(viewBounds.left + viewBounds.height + 150), float(viewBounds.top + viewBounds.height - 25)));
+        bubble.setPoint(4, sf::Vector2f(float(viewBounds.left + viewBounds.height + 130), float(viewBounds.top + viewBounds.height - 10)));
         bubble.setPoint(5, sf::Vector2f(float(viewBounds.left + 30), float(viewBounds.top + viewBounds.height - 10)));
         bubble.setPoint(6, sf::Vector2f(float(viewBounds.left + 10), float(viewBounds.top + viewBounds.height - 25)));
         bubble.setPoint(7, sf::Vector2f(float(viewBounds.left + 10), float(viewBounds.top + viewBounds.height - 45)));
@@ -287,7 +287,7 @@ void Trainer::rock(sf::RenderWindow &window, sf::View &view){
         sf::Sprite sprite;
         sprite.setTexture(texturePlayer);
         sprite.setTextureRect(sf::IntRect(2 + ((int) counterWalk/3) *82,322,80,80));
-        sprite.setPosition(viewBounds.left + 16,viewBounds.top + viewBounds.height/2 -5);
+        sprite.setPosition(viewBounds.left + 16,viewBounds.top + viewBounds.height/2 -60);
         window.draw(sprite);
         if (counterWalk < 12){
             counterWalk ++;

@@ -231,6 +231,7 @@ int Fight::update(sf::RenderWindow& window, BackpackMap& bag_map, Box* box){
             bag_map.backpack_pokemons[(*pplayer).index]->health = 0;
             //update opponent's level
             opponent_bag.backpack_pokemons[(*popponent).index]->level++;
+            opponent_bag.backpack_pokemons[(*popponent).index]->level++;
             (*popponent).level++;
             (*popponent).health.level++;
 
@@ -261,6 +262,11 @@ int Fight::update(sf::RenderWindow& window, BackpackMap& bag_map, Box* box){
             //update player's level (when a pokemon wins a fight, its level increases by 1)
             bag.backpack_pokemons[(*pplayer).index]->level++;
             bag_map.backpack_pokemons[(*pplayer).index]->level++;
+            
+            poke_buttons[(*pplayer).index]->level = (*pplayer).level;
+            int level = poke_buttons[(*pplayer).index]->level ;
+            poke_buttons[(*pplayer).index]->level_text.setString("LVL: "+std::to_string(level));
+            
             (*pplayer).level++;
             poke_buttons[(*pplayer).index]->Levelup();
 

@@ -72,9 +72,9 @@ void Backpack::setBackpack(int i){ //Some standard backpacks
         std::string name1 = "poras";
         std::string name2 = "arfau";
         std::string name3 = "lowtor";
-        Backpack_Pokemon* poke1 = new Backpack_Pokemon(name1, 1, 0, 100, 40);
-        Backpack_Pokemon* poke2 = new Backpack_Pokemon(name2, 1, 1, 100, 40);
-        Backpack_Pokemon* poke3 = new Backpack_Pokemon(name3, 1, 2, 100, 40);
+        Backpack_Pokemon* poke1 = new Backpack_Pokemon(name1, 13, 0, 100, 40);
+        Backpack_Pokemon* poke2 = new Backpack_Pokemon(name2, 14, 1, 100, 40);
+        Backpack_Pokemon* poke3 = new Backpack_Pokemon(name3, 15, 2, 100, 40);
         backpack_pokemons[0] = poke1;
         backpack_pokemons[1] = poke2;
         backpack_pokemons[2] = poke3;
@@ -106,6 +106,18 @@ void Backpack::setBackpack(int i){ //Some standard backpacks
         backpack_pokemons[2] = poke3;
         
     }
+    if(i==5){ //For Julien
+        std::string name1 = "twobee";
+        std::string name2 = "rodritata";
+        std::string name3 = "rabloni";
+        Backpack_Pokemon* poke1 = new Backpack_Pokemon(name1, 1, 0, 100, 30);
+        Backpack_Pokemon* poke2 = new Backpack_Pokemon(name2, 1, 1, 100, 20);
+        Backpack_Pokemon* poke3 = new Backpack_Pokemon(name3, 100, 2, 100, 40);
+        backpack_pokemons[0] = poke1;
+        backpack_pokemons[1] = poke2;
+        backpack_pokemons[2] = poke3;
+        
+    }
 }
 
 void Backpack::set_opponent(Opponent* opponent) {
@@ -125,7 +137,7 @@ ReturnValue Backpack::Pokeball_shoot(float& deltaTime, sf::RenderWindow& window,
 //        std::cout<<mouse_pos.x<<", "<<mouse_pos.y<<std::endl;
         //corresponds to the pokeball icon on the screen
 //        if((mouse_pos.x>140)&&(mouse_pos.x<180)&&(mouse_pos.y>280)&&(mouse_pos.y<330)){ //a changer avec les valeurs sur github
-        if((mouse_pos.x>140)&&(mouse_pos.x<180)&&(mouse_pos.y>310)&&(mouse_pos.y<360)){
+        if((mouse_pos.x>140)&&(mouse_pos.x<180)&&(mouse_pos.y>300)&&(mouse_pos.y<380)){
 
             dict_pokeball["Normalball"]-=1;
             value.string = "Normalball";
@@ -140,7 +152,7 @@ ReturnValue Backpack::Pokeball_shoot(float& deltaTime, sf::RenderWindow& window,
 
             new_Normalball.setPosition(width4, height);// Need to figure out where the starting x and y position are
             new_Normalball.velocityY = 1.2*-sqrt(5.0f * 981.0f * new_Normalball.ballHeight); //We need to reset the ball's position and starting speed when you shoot, that's why its in this class
-            new_Normalball.velocityX = 1.8*500;
+            new_Normalball.velocityX = 1.4*500;
             new_Normalball.in_air = true;
 
         }
@@ -153,7 +165,7 @@ ReturnValue Backpack::Pokeball_shoot(float& deltaTime, sf::RenderWindow& window,
                             sf::Vector2f mouse_pos = window.mapPixelToCoords(mousepixel);
 
                             //corresponds to the pokeball icon on the screen
-                            if((mouse_pos.x>250)&&(mouse_pos.x<305)&&(mouse_pos.y>310)&&(mouse_pos.y<360)){
+                            if((mouse_pos.x>250)&&(mouse_pos.x<305)&&(mouse_pos.y>300)&&(mouse_pos.y<380)){
 
 
                             dict_pokeball["Superball"]-=1;
@@ -169,7 +181,7 @@ ReturnValue Backpack::Pokeball_shoot(float& deltaTime, sf::RenderWindow& window,
 
                             new_Superball.setPosition(width4, height);// Need to figure out where the starting x and y position are
                             new_Superball.velocityY = 1.2*-sqrt(5.0f * 981.0f * new_Superball.ballHeight);//We need to reset the ball's position and starting speed when you shoot, that's why its in this class
-                            new_Superball.velocityX = 1.8*500;
+                            new_Superball.velocityX = 1.4*500;
                             new_Superball.in_air = true;
                     }
 
@@ -182,7 +194,7 @@ ReturnValue Backpack::Pokeball_shoot(float& deltaTime, sf::RenderWindow& window,
                                 sf::Vector2f mouse_pos = window.mapPixelToCoords(mousepixel);
 
                                 //corresponds to the pokeball icon on the screen
-                                if((mouse_pos.x>340)&&(mouse_pos.x<400)&&(mouse_pos.y>310)&&(mouse_pos.y<360)){
+                                if((mouse_pos.x>340)&&(mouse_pos.x<400)&&(mouse_pos.y>300)&&(mouse_pos.y<380)){
 
 
                                 dict_pokeball["Masterball"]-=1;
@@ -198,7 +210,7 @@ ReturnValue Backpack::Pokeball_shoot(float& deltaTime, sf::RenderWindow& window,
 
                                 new_Masterball.setPosition(width4, height);// Need to figure out where the starting x and y position are
                                 new_Masterball.velocityY = 1.2*-sqrt(5.0f * 981.0f * new_Masterball.ballHeight); //We need to reset the ball's position and starting speed when you shoot, that's why its in this class
-                                new_Masterball.velocityX = 1.8*500;
+                                new_Masterball.velocityX = 1.4*500;
                                 new_Masterball.in_air = true;
                         }
 
@@ -212,7 +224,7 @@ ReturnValue Backpack::Pokeball_shoot(float& deltaTime, sf::RenderWindow& window,
             //bool still_on_screen = new_Normalball.update(deltaTime, window,new_Normalball.proba, clock2, elapsed2,health_opponent);
         if(new_Normalball.waiting == false){
             new_Normalball.ball.setOrigin(100, 100);//I suppose (100,100) is close to the center of the sprite before rescaling
-            new_Normalball.ball.rotate(2*3.0f);
+            new_Normalball.ball.rotate(12*3.0f);
         }
         else{
             new_Normalball.ball.setRotation(0);
@@ -227,7 +239,7 @@ ReturnValue Backpack::Pokeball_shoot(float& deltaTime, sf::RenderWindow& window,
             int catched = new_Superball.update(deltaTime, window,new_Superball.proba, clock2, elapsed2,health_opponent);
                 if(new_Superball.waiting == false){
                     new_Superball.ball.setOrigin(100, 100);//I suppose (100,100) is close to the center of the sprite before rescaling
-                    new_Superball.ball.rotate(2*1.5f);
+                    new_Superball.ball.rotate(12*3.0f);
                 }
                 else{
                     new_Superball.ball.setRotation(0);
@@ -244,7 +256,7 @@ ReturnValue Backpack::Pokeball_shoot(float& deltaTime, sf::RenderWindow& window,
             int catched = new_Masterball.update(deltaTime, window,new_Masterball.proba, clock2, elapsed2,health_opponent);
                 if(new_Masterball.waiting == false){
                     new_Masterball.ball.setOrigin(310, 310);//I suppose (310,310) is close to the center of the sprite before rescaling
-                    new_Masterball.ball.rotate(2*1.5f);
+                    new_Masterball.ball.rotate(12*3.0f);
                 }
                 else{
                     new_Masterball.ball.setRotation(0);

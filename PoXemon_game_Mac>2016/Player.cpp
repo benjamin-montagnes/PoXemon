@@ -31,7 +31,7 @@ void Player::update(float& deltaTime, sf::RenderWindow& window, sf::Clock& clock
     //Jumps
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && canJump)||(sf::Keyboard::isKeyPressed(sf::Keyboard::W) && canJump)) {
         canJump = false;       //While jumping you can't jump
-        velocityY = -sqrt(2.0f * 981.0f * jumpHeight);
+        velocityY = 0.8*-sqrt(2.0f * 981.0f * jumpHeight);
     }
     //Testing health - will change when we have collision recognition
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {

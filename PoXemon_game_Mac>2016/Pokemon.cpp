@@ -20,8 +20,8 @@ Pokemon::Pokemon(sf::RenderWindow& window, float h, float v, Backpack_Pokemon ba
 
 	velocityX = 0.0f;
 	velocityY = 0.0f;
-	jumpHeight = h;
-	speed = v;
+	jumpHeight = 3*h;
+	speed = 2*v;
 	canJump = true;
 	shooting = false;
 	special_attack_1 = false;
